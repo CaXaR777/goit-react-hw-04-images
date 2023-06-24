@@ -1,6 +1,6 @@
 import * as s from './Modal.styled'
 import PropTypes from 'prop-types';
-import * as basicLightbox from 'basiclightbox'
+
 
 export const Modal = ({ hugeImg, closeModal }) => {
 //     const instance = basicLightbox.create(`
