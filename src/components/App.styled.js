@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 400px;
-  h1,
-  h2 {
-    padding-top: 20px;
-  }
+  margin-top: 50px;
+  max-width: 1400;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
