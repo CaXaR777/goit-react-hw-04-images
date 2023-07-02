@@ -1,111 +1,84 @@
 import { ImageGalleryItem } from "components/ImageGalleryItem/ImageGalleryItem"
 import { Modal } from "./../Modal/Modal"
-import { Component } from "react"
+import React, { useState } from "react"
 import PropTypes from 'prop-types';
 import * as s from './ImageGallery.styled'
 
 
-export class ImageGallery extends Component {
-
-  state = {
-    showModal: false,
-    hugeURL: ''
-  }
-
-  static propTypes = {
-    data: PropTypes.array.isRequired,
-  }
-
-
-//   openModal = (e) => {
-//     window.addEventListener("keydown", this.closeModalonESC);
-//     this.setState({hugeURL: e.currentTarget.getAttribute('huge'), showModal: true})
-//    console.log(this.state)
-//   }
-
-
-// openModal = (e) => {
-//     window.addEventListener("keydown", this.closeModalonESC);
-//     const hugeURL = e.currentTarget.getAttribute('huge');
-  
-//     this.setState({ hugeURL: hugeURL ,showModal: true }, () => {
-//       console.log(this.state);
-//     //   console.log(hugeURL); // Можно использовать hugeURL здесь
-//     });
-//   }
-
 
   
 
-// openModal = (e) => {
+ const ImageGallery = ({data}) => {
+
+  // state = {
+  //   showModal: false,
+  //   hugeURL: ''
+  // }
+  const [currentImage, setCurrentImage] = useState('');
+  const [modal, setModal] = useState(false);
+
+
+
+// const openModal = (hugeURL) => {
 //     window.addEventListener("keydown", this.closeModalonESC);
-//     const objectId = e.currentTarget.getAttribute('id'); // Получаем идентификатор объекта
-//     const object = this.props.data.find(item => item.id.toString() === objectId);
-//     const hugeURL = object ? object.largeImageURL : '';
-  
-//     this.setState({ hugeURL, showModal: true }, () => {
-//       console.log(hugeURL, objectId, object); // Проверяем значение hugeURL в консоли
-//     });
-//   }
-
-// openModal = (objectId) => {
-//     window.addEventListener("keydown", this.closeModalonESC);
-//     const object = this.props.data.find(item => item.id.toString() === objectId);
-//     const hugeURL = object ? object.largeImageURL : '';
-  
-//     this.setState({ hugeURL, showModal: true }, () => {
-//       console.log(hugeURL); // Проверяем значение hugeURL в консоли
-//     });
-//   }
-
-
-
-openModal = (hugeURL) => {
-    window.addEventListener("keydown", this.closeModalonESC);
     
-    this.setState({ showModal: true, hugeURL }, () => {
-      console.log(this.state);
-      console.log(hugeURL); // Можно использовать hugeURL здесь
-    });
-  }
+//     this.setState({ showModal: true, hugeURL }, () => {
+//       console.log(this.state);
+//     });
+//   }
+
   
+  const openModal = (hugeURL) => {
+  window.addEventListener('keydown', closeModalonESC);
+setModal(true);
+  setCurrentImage(hugeURL);
+  // console.log(hugeURL)
   
+};
   
   
 
-  closeModalonESC = (evt) => {
+  const closeModalonESC = (evt) => {
     if (evt.code === 'Escape') {
-      this.setState({ showModal: false });
-      window.removeEventListener("keydown", this.closeModalonESC)
+      setModal(false);
+      window.removeEventListener("keydown", closeModalonESC)
     }
   }
 
-  closeModalonOverlay = (evt) => {
+
+
+
+  const closeModalonOverlay = (evt) => {
     if (evt.target === evt.currentTarget) {
-      this.setState({ showModal: false });
+      setModal(false);
       window.removeEventListener("keydown", this.closeModalonESC)
     }
   }
 
-  render() {
-    const { showModal, hugeURL } = this.state;
-    const { data } = this.props;
+    const { showModal } = modal;
+    // const { showModal, hugeURL } = this.state;
+    // const { data } = this.props;
   
     return (
       <>
         <s.GalleryList>
           {data.map((image) => (
             <ImageGalleryItem
-              modalOpen={this.openModal}
+              modalOpen={openModal}
               key={image.id}
               image={image}
-              hugeURL={hugeURL}
+              hugeURL={image.largeImageURL}
             />
           ))}
         </s.GalleryList>
   
-        {showModal && <Modal closeModal={this.closeModalonOverlay} hugeImg={hugeURL} />}
+        {showModal && <Modal closeModal={closeModalonOverlay} hugeImg={currentImage} />}
       </>
     );
   }
-}  
+
+  ImageGallery.propTypes = {
+    data: PropTypes.array.isRequired,
+  };
+
+  export default ImageGallery

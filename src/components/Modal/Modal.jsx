@@ -2,7 +2,7 @@ import * as s from './Modal.styled'
 import PropTypes from 'prop-types';
 
 
-export const Modal = ({ hugeImg, closeModal }) => {
+export const Modal = ({ hugeImg, closeModal,  }) => {
 //     const instance = basicLightbox.create(`
 //     <img src="assets/images/image.png" width="800" height="600">
 // `)
