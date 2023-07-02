@@ -6,14 +6,7 @@
 // import { Loader } from "./Loader/Loader";
 // import { Message } from "./Message/Message";
 
-// export class App extends Component  {
-//   state = {
-//     searchPromt: '',
-//     page: 1,
-//     imagesArr: [],
-//     totalImages: 0,
-//     status: 'idle'
-//   }
+
 
 
 //   render() {
