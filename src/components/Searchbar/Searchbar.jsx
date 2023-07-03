@@ -1,6 +1,6 @@
-import * as s from './Searchbar.styled'
+import * as s from './Searchbar.styled';
 import PropTypes from 'prop-types';
-import { AiOutlineArrowRight } from "react-icons/ai";
+import { AiOutlineArrowRight } from 'react-icons/ai';
 
 // export const Searchbar = () => {
 // return (<header class="searchbar">
@@ -22,25 +22,24 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 
 export const Searchbar = ({ onSubmit }) => {
   return (
-  <s.SearchBar>
-    <s.SearchForm onSubmit={onSubmit}>
-      <s.SearchButton type="submit">
-          <AiOutlineArrowRight size={20}/>  
-        <span className="button-label">Search</span>
-      </s.SearchButton>
+    <s.SearchBar>
+      <s.SearchForm onSubmit={onSubmit}>
+        <s.SearchButton type="submit">
+          <AiOutlineArrowRight size={20} />
+          <span className="button-label">Search</span>
+        </s.SearchButton>
         <s.SearchInput
-        name="search"
-       
-        type="text"
-        autoComplete="off"
-        autoFocus
-        placeholder="Search images and photos"
-      />
-    </s.SearchForm>
-  </s.SearchBar>
-  )
-}
+          name="search"
+          type="text"
+          autoComplete="off"
+          autoFocus
+          placeholder="Search images and photos"
+        />
+      </s.SearchForm>
+    </s.SearchBar>
+  );
+};
 
 Searchbar.propTypes = {
-  onSubmit: PropTypes.func.isRequired
-} 
+  onSubmit: PropTypes.func.isRequired,
+};

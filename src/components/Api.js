@@ -12,6 +12,6 @@ const searchParams = new URLSearchParams({
 export async function apiFetch(searchQuery, page) {
   const response = await axios.get(
     `https://pixabay.com/api/?${searchParams}&page=${page}&q=${searchQuery}`
-    );
+  );
   return response;
 }

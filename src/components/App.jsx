@@ -6,12 +6,9 @@
 // import { Loader } from "./Loader/Loader";
 // import { Message } from "./Message/Message";
 
-
-
-
 //   render() {
 //     const { status, imagesArr, totalImages } = this.state;
-  
+
 //     const components = {
 //       idle: <Message text='Fulfill your imagination' />,
 //       pending: <Loader />,
@@ -26,12 +23,12 @@
 //             <Message text='Hope it`s fulfilled' />
 //           )}
 //       )</>),
-      
+
 //       default: <Message text='Something went wrong' />,
 //     };
-  
+
 //     const componentToRender = components[status] || components.default;
-  
+
 //     return (
 //       <>
 //         <Searchbar onSubmit={this.submitHandler} />
@@ -41,13 +38,13 @@
 //       </>
 //     );
 //   }
-import  React, { useState,  } from "react";
-import { Searchbar } from "./Searchbar/Searchbar";
-import  ImageGallery  from "./ImageGallery/ImageGallery";
-import { apiFetch } from "./Api";
-import { Button } from "./Button/Button";
-import { Loader } from "./Loader/Loader";
-import { Message } from "./Message/Message";
+import React, { useState } from 'react';
+import { Searchbar } from './Searchbar/Searchbar';
+import ImageGallery from './ImageGallery/ImageGallery';
+import { apiFetch } from './Api';
+import { Button } from './Button/Button';
+import { Loader } from './Loader/Loader';
+import { Message } from './Message/Message';
 
 export const App = () => {
   // state = {
@@ -63,7 +60,7 @@ export const App = () => {
   const [totalImages, setTotalImages] = useState(0);
   const [status, setStatus] = useState('idle');
 
-  const submitHandler = async (e) => {
+  const submitHandler = async e => {
     // e.preventDefault()
     // this.setState({ searchPromt: e.target.elements.search.value.trim(), page: 1 }, async () => {
     //   if (!this.state.searchPromt) {
@@ -94,37 +91,36 @@ export const App = () => {
     } catch (error) {
       setStatus('rejected');
     }
-    
   };
 
   const loadMoreImages = async () => {
-  //   this.setState({ page: this.state.page + 1 }, async () => {
-  //     try {
-  //    const images = await apiFetch(this.state.searchPromt, this.state.page)
-  //    this.setState(prevState => ({
-  //      imagesArr: [...prevState.imagesArr, ...images.data.hits]
-  //      }));
-  //    } catch (e) {
-  //      alert('Something went wrong')
-  //    }
-  //  })
-  try {
-    const nextPage = page + 1;
-    const images = await apiFetch(searchPromt, nextPage);
-    setImagesArr((prevImagesArr) => [...prevImagesArr, ...images.data.hits]);
-    setPage(nextPage);
-  } catch (error) {
-    alert('Something went wrong');
-  }
+    //   this.setState({ page: this.state.page + 1 }, async () => {
+    //     try {
+    //    const images = await apiFetch(this.state.searchPromt, this.state.page)
+    //    this.setState(prevState => ({
+    //      imagesArr: [...prevState.imagesArr, ...images.data.hits]
+    //      }));
+    //    } catch (e) {
+    //      alert('Something went wrong')
+    //    }
+    //  })
+    try {
+      const nextPage = page + 1;
+      const images = await apiFetch(searchPromt, nextPage);
+      setImagesArr(prevImagesArr => [...prevImagesArr, ...images.data.hits]);
+      setPage(nextPage);
+    } catch (error) {
+      alert('Something went wrong');
+    }
   };
 
-  
-    // const { status, imagesArr, totalImages } = this.state;
+  // const { status, imagesArr, totalImages } = this.state;
 
-    const components = {
-      idle: <Message text="Let's find what you need" />,
-      pending: <Loader />,
-      resolved: imagesArr.length === 0 ? (
+  const components = {
+    idle: <Message text="Let's find what you need" />,
+    pending: <Loader />,
+    resolved:
+      imagesArr.length === 0 ? (
         <Message text="Nothing is here!" />
       ) : (
         <>
@@ -136,16 +132,15 @@ export const App = () => {
           )}
         </>
       ),
-      default: <Message text="Something went wrong" />,
-    };
+    default: <Message text="Something went wrong" />,
+  };
 
-    const componentToRender = components[status] || components.default;
+  const componentToRender = components[status] || components.default;
 
-    return (
-      <React.Fragment>
-        <Searchbar onSubmit={submitHandler} />
-        <div className="container">{componentToRender}</div>
-      </React.Fragment>
-    );
-  }
-
+  return (
+    <React.Fragment>
+      <Searchbar onSubmit={submitHandler} />
+      <div className="container">{componentToRender}</div>
+    </React.Fragment>
+  );
+};
